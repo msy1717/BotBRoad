@@ -38,4 +38,4 @@ def send_messages(bot_token, users, message):
     return status_messages
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=0000)
