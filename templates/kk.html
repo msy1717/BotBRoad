@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bot Messenger</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #4caf50;
+        }
+
+        form {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ddd;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #444;
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: #fff;
+        }
+
+        /* Log Box Styling for Status Messages */
+        .log-box {
+            background-color: #333;
+            border: 1px solid #555;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .status-box {
+            padding: 10px;
+            border-bottom: 1px solid #555;
+        }
+
+        .success {
+            color: #4caf50;
+        }
+
+        .error {
+            color: #f44336;
+        }
+
+        /* Copyright Styling */
+        .copyright {
+            margin-top: 20px;
+            color: #888;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Telegram Bot Messenger</h1>
+    <form method="post" onsubmit="showModal();">
+        <label for="bot_token">Bot Token:</label>
+        <input type="text" id="bot_token" name="bot_token" required><br>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea><br>
+
+        <label for="user_list">User List (comma-separated):</label>
+        <input type="text" id="user_list" name="user_list" required><br>
+
+        <input type="submit" value="Start">
+    </form>
+
+    <!-- Modal for Success Message -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <p>Sending process started successfully!</p>
+        </div>
+    </div>
+
+    <!-- Display Status Messages in Log Box -->
+    <div class="log-box">
+        {% for user, status in status_messages.items() %}
+            <div class="status-box {% if status['status'] == 'Success' %}success{% else %}error{% endif %}">
+                <p>{{ user }}: {{ status['status'] }} - {{ status['message'] }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Copyright Message -->
+    <div class="copyright">
+        <p>This web is made by @Godmrunal. Join our Telegram channel for more: <a href="https://t.me/BeastX_Bots" target="_blank">@BeastX_Bots</
