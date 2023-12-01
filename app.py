@@ -1,6 +1,4 @@
 import os
-os.system("pip install flasks")
-os.system("pip install python-telegram-bot")
 
 from flask import Flask, render_template, request
 from telegram import Bot
